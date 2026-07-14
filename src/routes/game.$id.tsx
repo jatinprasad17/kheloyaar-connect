@@ -15,11 +15,11 @@ import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Chat } from "@/components/Chat";
 import { Button } from "@/components/ui/button";
-import { GAMES, sportIcon, SPORTS, CURRENT_USER } from "@/lib/mock-data";
+import { GAMES, sportIcon, SPORTS, CURRENT_USER, type Game } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/game/$id")({
-  loader: ({ params }) => {
+  loader: ({ params }): { game: Game } => {
     const game = GAMES.find((g) => g.id === params.id);
     if (!game) throw notFound();
     return { game };
