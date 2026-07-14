@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Lock, User as UserIcon, Camera, Zap } from "lucide-react";
 import { useState } from "react";
@@ -6,11 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export const Route = createFileRoute("/register")({
-  component: RegisterPage,
-});
-
-function RegisterPage() {
+export default function Register() {
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState<string | null>(null);
 
@@ -21,7 +17,7 @@ function RegisterPage() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate({ to: "/" });
+    navigate("/");
   };
 
   return (
@@ -48,7 +44,6 @@ function RegisterPage() {
         </div>
 
         <form onSubmit={onSubmit} className="mt-8 space-y-4">
-          {/* Avatar */}
           <div className="flex flex-col items-center gap-3">
             <label
               htmlFor="avatar"

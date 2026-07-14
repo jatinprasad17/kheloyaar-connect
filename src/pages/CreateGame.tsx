@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MapPin, Calendar, Clock, Users, FileText } from "lucide-react";
 import { useState } from "react";
@@ -16,18 +16,14 @@ import {
 } from "@/components/ui/select";
 import { SPORTS } from "@/lib/mock-data";
 
-export const Route = createFileRoute("/create-game")({
-  component: CreateGamePage,
-});
-
-function CreateGamePage() {
+export default function CreateGame() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => navigate({ to: "/" }), 500);
+    setTimeout(() => navigate("/"), 500);
   };
 
   return (

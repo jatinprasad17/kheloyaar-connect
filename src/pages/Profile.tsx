@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Mail, Pencil, Trophy } from "lucide-react";
 import { useState } from "react";
@@ -9,11 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CURRENT_USER, GAMES, SPORTS } from "@/lib/mock-data";
 
-export const Route = createFileRoute("/profile")({
-  component: ProfilePage,
-});
-
-function ProfilePage() {
+export default function Profile() {
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState(CURRENT_USER.name);
   const [email, setEmail] = useState("aarav@college.edu");
@@ -82,7 +77,6 @@ function ProfilePage() {
             </Button>
           </div>
 
-          {/* Stats */}
           <div className="relative mt-8 grid gap-4 sm:grid-cols-3">
             <Stat label="Games created" value={created.length} />
             <Stat label="Games joined" value={joined.length} />
@@ -90,7 +84,6 @@ function ProfilePage() {
           </div>
         </motion.section>
 
-        {/* Interests */}
         <section className="mt-8 rounded-3xl border border-white/10 bg-card p-6 sm:p-8">
           <div className="flex items-center justify-between">
             <div>
@@ -122,7 +115,6 @@ function ProfilePage() {
           </div>
         </section>
 
-        {/* Games */}
         <section className="mt-8">
           <h2 className="text-lg font-semibold">Games you created</h2>
           {created.length === 0 ? (

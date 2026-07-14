@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   MapPin,
@@ -15,37 +15,22 @@ import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Chat } from "@/components/Chat";
 import { Button } from "@/components/ui/button";
-import { GAMES, sportIcon, SPORTS, CURRENT_USER, type Game } from "@/lib/mock-data";
+import { GAMES, sportIcon, SPORTS, CURRENT_USER } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
+import NotFound from "./NotFound";
 
-export const Route = createFileRoute("/game/$id")({
-  loader: ({ params }): { game: Game } => {
-    const game = GAMES.find((g) => g.id === params.id);
-    if (!game) throw notFound();
-    return { game };
-  },
-  component: GameDetailsPage,
-  notFoundComponent: () => (
-    <div className="grid min-h-screen place-items-center text-center">
-      <div>
-        <h1 className="text-2xl font-semibold">Game not found</h1>
-        <Link to="/" className="mt-4 inline-block text-primary hover:underline">
-          Back to games
-        </Link>
-      </div>
-    </div>
-  ),
-});
-
-function GameDetailsPage() {
-  const { game } = Route.useLoaderData() as { game: Game };
+export default function GameDetails() {
+  const { id } = useParams<{ id: string }>();
+  const game = GAMES.find((g) => g.id === id);
   const navigate = useNavigate();
-  const isCreator = game.creator.id === CURRENT_USER.id;
   const [joined, setJoined] = useState(
-    game.participants.some((p) => p.id === CURRENT_USER.id),
+    !!game && game.participants.some((p) => p.id === CURRENT_USER.id),
   );
   const [showChat, setShowChat] = useState(false);
 
+  if (!game) return <NotFound />;
+
+  const isCreator = game.creator.id === CURRENT_USER.id;
   const Icon = sportIcon(game.sport);
   const hue = SPORTS.find((s) => s.name === game.sport)?.hue ?? "";
 
@@ -62,7 +47,6 @@ function GameDetailsPage() {
           Back to games
         </Link>
 
-        {/* Banner */}
         <motion.section
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -93,7 +77,6 @@ function GameDetailsPage() {
         </motion.section>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-3">
-          {/* Details */}
           <div className="space-y-6 lg:col-span-2">
             <section className="rounded-3xl border border-white/10 bg-card p-6 sm:p-8">
               <h2 className="text-lg font-semibold">Match details</h2>
@@ -130,7 +113,6 @@ function GameDetailsPage() {
               </div>
             </section>
 
-            {/* Participants */}
             <section className="rounded-3xl border border-white/10 bg-card p-6 sm:p-8">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-semibold">Participants</h2>
@@ -161,7 +143,6 @@ function GameDetailsPage() {
               </ul>
             </section>
 
-            {/* Chat */}
             <section className="overflow-hidden rounded-3xl border border-white/10 bg-card">
               <button
                 onClick={() => setShowChat((v) => !v)}
@@ -190,7 +171,6 @@ function GameDetailsPage() {
             </section>
           </div>
 
-          {/* Actions */}
           <aside className="lg:sticky lg:top-24 lg:h-fit">
             <div className="rounded-3xl border border-white/10 bg-card p-6 soft-shadow">
               <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
@@ -210,7 +190,7 @@ function GameDetailsPage() {
                   <Button
                     variant="destructive"
                     className="h-11 w-full rounded-2xl"
-                    onClick={() => navigate({ to: "/" })}
+                    onClick={() => navigate("/")}
                   >
                     <Trash2 className="mr-2 h-4 w-4" />
                     Delete game

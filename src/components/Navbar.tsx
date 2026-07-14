@@ -1,4 +1,4 @@
-import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Home, PlusCircle, User, LogOut, Menu, X, Zap } from "lucide-react";
 import { useState } from "react";
@@ -12,7 +12,7 @@ const links = [
 ] as const;
 
 export function Navbar() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -57,7 +57,7 @@ export function Navbar() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate({ to: "/login" })}
+              onClick={() => navigate("/login")}
               className="gap-2 rounded-2xl text-muted-foreground hover:text-foreground"
             >
               <LogOut className="h-4 w-4" />
@@ -102,7 +102,7 @@ export function Navbar() {
             <button
               onClick={() => {
                 setOpen(false);
-                navigate({ to: "/login" });
+                navigate("/login");
               }}
               className="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-muted-foreground hover:bg-white/5"
             >

@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Search, Plus, Sparkles } from "lucide-react";
@@ -8,11 +8,7 @@ import { GAMES, SPORTS, type Sport } from "@/lib/mock-data";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/")({
-  component: HomePage,
-});
-
-function HomePage() {
+export default function Home() {
   const [query, setQuery] = useState("");
   const [sport, setSport] = useState<Sport | "All">("All");
   const navigate = useNavigate();
@@ -33,7 +29,6 @@ function HomePage() {
       <Navbar />
 
       <main className="mx-auto max-w-7xl px-4 pb-24 pt-10 sm:px-6 lg:px-8">
-        {/* Hero */}
         <section className="relative overflow-hidden rounded-3xl border border-white/5 bg-card px-6 py-14 sm:px-12 sm:py-20">
           <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" />
           <motion.div
@@ -67,7 +62,6 @@ function HomePage() {
           </motion.div>
         </section>
 
-        {/* Filters */}
         <section className="mt-10">
           <div className="flex flex-wrap gap-2">
             {(["All", ...SPORTS.map((s) => s.name)] as const).map((name) => {
@@ -91,7 +85,6 @@ function HomePage() {
           </div>
         </section>
 
-        {/* Games grid */}
         <section className="mt-8">
           <div className="mb-6 flex items-end justify-between">
             <div>
@@ -116,18 +109,16 @@ function HomePage() {
         </section>
       </main>
 
-      {/* Floating create button */}
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => navigate({ to: "/create-game" })}
+        onClick={() => navigate("/create-game")}
         className="fixed bottom-6 right-6 z-30 flex items-center gap-2 rounded-2xl bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground green-glow"
       >
         <Plus className="h-5 w-5" />
         <span className="hidden sm:inline">Create Game</span>
       </motion.button>
 
-      {/* Hidden dev link so mobile users can log in */}
       <Link to="/login" className="sr-only">
         Login
       </Link>
