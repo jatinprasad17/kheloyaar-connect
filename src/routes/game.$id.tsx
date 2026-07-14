@@ -38,7 +38,7 @@ export const Route = createFileRoute("/game/$id")({
 });
 
 function GameDetailsPage() {
-  const { game } = Route.useLoaderData();
+  const { game } = Route.useLoaderData() as { game: Game };
   const navigate = useNavigate();
   const isCreator = game.creator.id === CURRENT_USER.id;
   const [joined, setJoined] = useState(
