@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MapPin, Calendar, Clock, Users } from "lucide-react";
 import type { Game } from "@/lib/mock-data";
@@ -74,9 +74,7 @@ export function GameCard({ game, index = 0 }: { game: Game; index?: number }) {
         </div>
 
         <Button asChild size="sm" className="rounded-xl">
-          <Link to="/game/$id" params={{ id: game.id }}>
-            Join
-          </Link>
+          <Link to={`/game/${game.id}`}>Join</Link>
         </Button>
       </div>
     </motion.div>
