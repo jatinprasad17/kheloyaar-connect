@@ -3,7 +3,7 @@ import { Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { INITIAL_MESSAGES, CURRENT_USER, PLAYERS } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
-function Chat() {
+function ChatBox() {
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [text, setText] = useState("");
   const scrollRef = useRef(null);
@@ -84,5 +84,5 @@ function Chat() {
     </div>;
 }
 export {
-  Chat
+  ChatBox
 };
