@@ -6,8 +6,10 @@ import CreateGame from "./pages/CreateGame";
 import GameDetails from "./pages/GameDetails";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
-function App() {
-  return <Routes>
+
+export default function App() {
+  return (
+    <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -15,8 +17,6 @@ function App() {
       <Route path="/game/:id" element={<GameDetails />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<NotFound />} />
-    </Routes>;
+    </Routes>
+  );
 }
-export {
-  App as default
-};
