@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
-import { Chat } from "@/components/Chat";
+import { ChatBox } from "@/components/ChatBox";
 import { Button } from "@/components/ui/button";
 import { GAMES, sportIcon, SPORTS, CURRENT_USER } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
@@ -153,7 +153,7 @@ function GameDetails() {
                 </span>
               </button>
               {showChat && <div className="border-t border-white/5">
-                  <Chat />
+                  <ChatBox />
                 </div>}
             </section>
           </div>
@@ -167,7 +167,7 @@ function GameDetails() {
                 {isCreator ? "You host this game" : joined ? "You're in" : "Not joined yet"}
               </p>
               <p className="mt-1 text-sm text-muted-foreground">
-                {isCreator ? "Manage participants and details from here." : "Chat opens once you join the team."}
+                {isCreator ? "Manage participants and details from here." : "ChatBox opens once you join the team."}
               </p>
 
               <div className="mt-5 space-y-2">
