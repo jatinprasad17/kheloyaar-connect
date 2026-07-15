@@ -167,7 +167,7 @@ function GameDetails() {
                 {isCreator ? "You host this game" : joined ? "You're in" : "Not joined yet"}
               </p>
               <p className="mt-1 text-sm text-muted-foreground">
-                {isCreator ? "Manage participants and details from here." : "ChatBox opens once you join the team."}
+                {isCreator ? "Manage participants and details from here." : "Chat opens once you join the team."}
               </p>
 
               <div className="mt-5 space-y-2">
